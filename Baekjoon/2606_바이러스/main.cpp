@@ -18,5 +18,7 @@ int main(void)
     input();
     solution();
 
+    cout << "Test World 2";
+
     return 0;
 }
