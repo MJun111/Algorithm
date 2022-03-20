@@ -18,6 +18,7 @@ int main(void)
     input();
     solution();
 
+    cout << "Test";
 
     return 0;
 }
