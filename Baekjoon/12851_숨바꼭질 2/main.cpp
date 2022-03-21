@@ -24,14 +24,14 @@ void BFS(int n, int k)
 
         visited[curLocate] = true;
 
-        if (curLocate == k)                 // ¸ñÀûÁö µµÂø ½Ã
+        if (curLocate == k)                 // ëª©ì ì§€ ë„ì°© ì‹œ
         {
-            if (minTime > curTime)          // ÃÖ¼Ò ½Ã°£º¸´Ù ÇöÀç ½Ã°£ÀÌ Àû´Ù¸é °»½Å
+            if (minTime > curTime)          // ìµœì†Œ ì‹œê°„ë³´ë‹¤ í˜„ìž¬ ì‹œê°„ì´ ì ë‹¤ë©´ ê°±ì‹ 
             {
                 minTime = curTime;
-                minCase = 1;                // Ã£´Â ¹æ¹ýÀÇ ¼ö 1ºÎÅÍ Ä«¿îÆ®
+                minCase = 1;                // ì°¾ëŠ” ë°©ë²•ì˜ ìˆ˜ 1ë¶€í„° ì¹´ìš´íŠ¸
             }
-            else if (minTime == curTime)    // °°Àº µµ´Þ ½Ã°£À¸·Î »õ·Î¿î °æ¿ì°¡ ³ª¿Ã °æ¿ì Ã£´Â ¹æ¹ýÀÇ ¼ö Ãß°¡
+            else if (minTime == curTime)    // ê°™ì€ ë„ë‹¬ ì‹œê°„ìœ¼ë¡œ ìƒˆë¡œìš´ ê²½ìš°ê°€ ë‚˜ì˜¬ ê²½ìš° ì°¾ëŠ” ë°©ë²•ì˜ ìˆ˜ ì¶”ê°€
                 minCase++;
         }
 
