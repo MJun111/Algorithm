@@ -6,10 +6,10 @@ using namespace std;
 #define MAX 100001
 
 int n, k;
-int minTime = MAX;
+int minTime = MAX;      // 최단 시간
 bool visited[MAX];
-int parent[MAX];
-vector<int> path;
+int parent[MAX];        // 이전 위치
+vector<int> path;       // 경로
 
 void BFS(int n, int k)
 {
@@ -26,17 +26,17 @@ void BFS(int n, int k)
 
         if (curLocate == k)                 // 목적지 도착 시
         {
-            if (minTime > curTime)          // 최소 시간보다 현재 시간이 적다면 갱신
+            if (minTime > curTime)          // 최단 시간보다 현재 시간이 적다면 갱신
             {
                 minTime = curTime;
             }
 
             int idx = curLocate;
 
-            while (idx != n)
+            while (idx != n)                // 초기 위치가 될 때까지
             {
-                path.push_back(idx);
-                idx = parent[idx];
+                path.push_back(idx);        // 경로 추가
+                idx = parent[idx];          // 이전 노드 탐색
             }
             path.push_back(n);
 
