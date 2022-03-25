@@ -20,6 +20,11 @@ int BFS(int n)
 		int cl = q.front().second;
 		q.pop();
 
+		if (sc == s)
+		{
+			return arr[sc][cl];
+		}
+
 		if (arr[sc][sc] == 0)		// บนป็
 		{
 			q.push({ sc, sc });
@@ -37,13 +42,14 @@ int BFS(int n)
 		}
 	}
 
+	/*
 	for (int i = 0; i <= s; i++)
 	{
 		if (arr[s][i] != 0)
 			if (ans == -1 || ans > arr[s][i])
 				ans = arr[s][i];
 	}
-
+	*/
 	return ans;
 }
 
