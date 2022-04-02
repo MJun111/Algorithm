@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "13702_이상한 술집", "13702_이상한 술집.vcxproj", "{3FB35F44-50DA-47DC-87DA-7ADE61D451A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3FB35F44-50DA-47DC-87DA-7ADE61D451A2}.Debug|x64.ActiveCfg = Debug|x64
+		{3FB35F44-50DA-47DC-87DA-7ADE61D451A2}.Debug|x64.Build.0 = Debug|x64
+		{3FB35F44-50DA-47DC-87DA-7ADE61D451A2}.Debug|x86.ActiveCfg = Debug|Win32
+		{3FB35F44-50DA-47DC-87DA-7ADE61D451A2}.Debug|x86.Build.0 = Debug|Win32
+		{3FB35F44-50DA-47DC-87DA-7ADE61D451A2}.Release|x64.ActiveCfg = Release|x64
+		{3FB35F44-50DA-47DC-87DA-7ADE61D451A2}.Release|x64.Build.0 = Release|x64
+		{3FB35F44-50DA-47DC-87DA-7ADE61D451A2}.Release|x86.ActiveCfg = Release|Win32
+		{3FB35F44-50DA-47DC-87DA-7ADE61D451A2}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D73A4B7F-BCD8-4D76-94D2-B9681EA61E7B}
+	EndGlobalSection
+EndGlobal
