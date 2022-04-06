@@ -1,7 +1,21 @@
 #include <string>
 #include <vector>
+#include <algorithm>
+#include <map>
 #include <iostream>
 using namespace std;
+
+struct web
+{
+    int idx;
+    int basicPoint;
+    vector<string> outLinks;
+    double linkPoint;
+    double matchPoint;
+};
+
+vector<web> Web;
+map<string, int> page_num;
 
 string findURL(string str)
 {
@@ -15,11 +29,104 @@ string findURL(string str)
     return URL;
 }
 
+int findWord(string str, string word)
+{
+    string cur = "";
+    int cnt = 0;
+
+    for (int i = 0; i < str.length(); i++)
+    {
+        if (isalpha(str[i]) == 0)
+        {
+            if (cur == word)
+                cnt++;
+            cur = "";
+        }
+        else
+            cur += str[i];
+    }
+    return cnt;
+}
+
+vector<string> findOutLinks(string str)
+{
+    vector<string> res;
+    string t = "<a href=\"https://";
+    int idx = str.find(t);
+
+    while (idx != str.npos)
+    {
+        idx += t.length();
+        string cur = "";
+        
+        while (str[idx] != '\"')
+            cur += str[idx++];
+
+        res.push_back(cur);
+        str = str.substr(idx);
+        idx = str.find(t);
+    }
+    return res;
+}
+
+string ToLower(string str)
+{
+    transform(str.begin(), str.end(), str.begin(), ::tolower);
+    return str;
+}
+
+bool _compare(web a, web b)
+{
+    if (a.matchPoint > b.matchPoint)
+        return true;
+    if (a.matchPoint == b.matchPoint)
+    {
+        if (a.idx < b.idx)
+            return true;
+
+        return false;
+    }
+    return false;
+}
+
+void calcPoint()
+{
+    for (int i = 0; i < Web.size(); i++)
+    {
+        vector<string> Links = Web[i].outLinks;
+
+        for (int j = 0; j < Links.size(); j++)
+        {
+            string Link = Links[j];
+            if (page_num[Link] == 0)
+                continue;
+            
+            int idx = page_num[Link] - 1;
+            Web[idx].linkPoint += ((double)Web[i].basicPoint / (double)Links.size());
+        }
+    }
+    for (int i = 0; i < Web.size(); i++)
+        Web[i].matchPoint = Web[i].basicPoint + Web[i].linkPoint;
+    sort(Web.begin(), Web.end(), _compare);
+}
+
 int solution(string word, vector<string> pages) {
     int answer = 0;
-    
-    cout << findURL(pages[0]);
 
+    word = ToLower(word);
+
+    for (int i = 0; i < pages.size(); i++)
+    {
+        string str = ToLower(pages[i]);
+        string URL = findURL(str);
+        page_num[URL] = i + 1;
+        int basicPoint = findWord(str, word);
+        vector<string> outLinks = findOutLinks(str);
+
+        Web.push_back({ i, basicPoint, outLinks, 0.0, 0.0 });
+    }
+    calcPoint();
+    answer = Web[0].idx;
     return answer;
 }
 
