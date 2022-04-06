@@ -1,13 +1,24 @@
 #include <string>
 #include <vector>
-#include <regex>
 #include <iostream>
 using namespace std;
 
+string findURL(string str)
+{
+    string t = "<meta property=\"og:url\" content=\"https://";
+    int idx = str.find(t) + t.length();
+    string URL = "";
+
+    while (str[idx] != '\"')
+        URL += str[idx++];
+
+    return URL;
+}
+
 int solution(string word, vector<string> pages) {
     int answer = 0;
-
-
+    
+    cout << findURL(pages[0]);
 
     return answer;
 }
