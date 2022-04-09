@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include <queue>
 #include <cstring>
 using namespace std;
@@ -8,16 +7,13 @@ using namespace std;
 
 int n, m;     
 int time = 0;
+bool check = false;
+int cheese = 0;
 
 int board[MAX][MAX];
-bool air[MAX][MAX];      // 바깥 공기 영역
-
+bool visited[MAX][MAX];
 int dr[4] = { -1, 0, 1, 0 };
 int dc[4] = { 0, -1, 0, 1 };
-
-queue<pair<int, int>> q;
-bool check = false;
-vector<int> c;
 
 void input()
 {
@@ -35,87 +31,55 @@ bool checkRange(int r, int c)
     return true;
 }
 
-void checkCheese()
-{
-    int cnt = 0;
-
-    for (int i = 0; i < n; i++)
-        for (int j = 0; j < m; j++)
-            if (board[i][j] == 1)
-                cnt++;
-
-    if (cnt == 0)
-        check = true;
-    else
-        c.push_back(cnt);
-}
-
 void BFS()
 {
-    memset(air, false, sizeof(air));
+    queue<pair<int, int>> q;
+    int cnt = 0;
     q.push({ 0, 0 });
 
-    // 바깥 공기부분
     while (!q.empty())
     {
         int r = q.front().first;
         int c = q.front().second;
         q.pop();
 
-        air[r][c] = true;
-
         for (int i = 0; i < 4; i++)
         {
             int rr = r + dr[i];
             int cc = c + dc[i];
 
-            if (checkRange(rr, cc) && board[rr][cc] == 0 && air[rr][cc] == false)
-                q.push({ rr, cc });
+            if (checkRange(rr, cc) && !visited[rr][cc])
+            {
+                visited[rr][cc] = true;
+
+                if (board[rr][cc] == 0)
+                    q.push({ rr, cc });
+                else
+                {
+                    board[rr][cc] = 0;
+                    cnt++;
+                }
+            }
         }
     }
 
-    // 지울 치즈 부분
-    for (int i = 1; i < n - 1; i++)
-        for (int j = 1; j < m - 1; j++)
-            if (board[i][j] == 1)
-            {
-                for (int k = 0; k < 4; k++)
-                {
-                    int rr = i + dr[k];
-                    int cc = j + dc[k];
-
-                    if (air[rr][cc])
-                    {
-                        board[i][j] = 0;
-                        break;
-                    }
-                }
-            }
-
-    time++;
-}
-
-void Print()
-{
-    cout << "\n\n";
-
-    for (int i = 0; i < n; i++)
+    if (cnt == 0)
+        check = true;
+    else
     {
-        for (int j = 0; j < m; j++)
-            cout << board[i][j] << " ";
-        cout << "\n";
+        cheese = cnt;
+        time++;
+        memset(visited, 0, sizeof(visited));
     }
 }
+
 
 void solution()
 {
-    while (!check)
-    {
+    while (!check) 
         BFS();
-        checkCheese();
-    }
-    cout << time << "\n";
-    cout << c[c.size() - 1] << "\n";
+    
+    cout << time << "\n" << cheese << "\n";
 }
 
 int main()
