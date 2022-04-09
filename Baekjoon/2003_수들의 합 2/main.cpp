@@ -20,7 +20,7 @@ void solution()
     int cnt = 0;
     int sum = arr[1];
 
-    while (end <= n)
+    while (start <= end && end <= n)
     {
         if (sum <= m)
         {
@@ -36,7 +36,7 @@ void solution()
             if (start > end)
             {
                 end = start;
-                sum = arr[start];
+                sum = arr[end];
             }
         }
     }
