@@ -9,7 +9,7 @@ int n = 0;
 void input()
 {
 	int num;
-	while (cin >> num)
+	while (cin >> num)			// 루트, 왼, 오
 		tree[n++] = num;
 }
 
@@ -25,7 +25,7 @@ void postorder(int start, int end)
 
 	postorder(start + 1, i);			// 왼쪽 서브트리 탐색
 	postorder(i, end);					// 오른쪽 서브트리 탐색
-	cout << tree[start] << "\n";
+	cout << tree[start] << "\n";		// 루트
 }
 
 void solution()
