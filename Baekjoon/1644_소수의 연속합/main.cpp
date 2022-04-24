@@ -30,10 +30,9 @@ void solution()
 	int cnt = 0;
 
 	getPrime();
-
-	/*
+	
 	int L = 0, R = 0, sum = 0;
-	while (L <= R)
+	while (L <= R)		
 	{
 		if (R > n)
 			break;
@@ -58,37 +57,7 @@ void solution()
 			sum += R;
 		}
 	}
-	*/
-	p_sum.push_back(0);		// ?
-	for (int i = 2; i <= MAX; i++)
-		if (!prime[i])
-		{
-			sum += i;
-			p_sum.push_back(sum);
-		}
 	
-	int left, right;
-	cnt = 0;
-	left = 0;
-	right = 0;
-
-	while (left <= right && right < p_sum.size())
-	{
-		if (p_sum[right] - p_sum[left] > n)
-		{
-			left++;
-		}
-		else if (p_sum[right] - p_sum[left] < n)
-		{
-			right++;
-		}
-		else // (p_sum[right] - p_sum[left] == N)
-		{
-			cnt++;
-			right++;
-		}
-	}
-
 	cout << cnt << "\n";
 }
 
