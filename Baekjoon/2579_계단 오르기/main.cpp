@@ -23,7 +23,7 @@ void solution()
     for (int i = 3; i <= n; i++)
     {
         dp[i][0] = max(dp[i - 2][0], dp[i - 2][1]) + arr[i];    // [i][0] : i-1번째 계단을 밟지 않고 온 최댓 값
-        dp[i][1] = max(dp[i - 1][0], dp[i - 2][1]) + arr[i];    // [i][1] : i-1번째 계단을 밟고 온 최댓 값
+        dp[i][1] = dp[i - 1][0] + arr[i];                       // [i][1] : i-1번째 계단을 밟고 온 최댓 값
     }
     cout << max(dp[n][0], dp[n][1]);
 }
