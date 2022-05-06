@@ -5,7 +5,7 @@ using namespace std;
 
 int n;
 int arr[MAX];
-long long dp[MAX][21];
+long long dp[MAX][21];      // [n자리][만들 수 있는 수]
 
 void input()
 {
