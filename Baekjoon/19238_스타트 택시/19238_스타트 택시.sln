@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "19238_스타트 택시", "19238_스타트 택시.vcxproj", "{3170973C-1EAD-4BDF-BF92-767BF856361A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3170973C-1EAD-4BDF-BF92-767BF856361A}.Debug|x64.ActiveCfg = Debug|x64
+		{3170973C-1EAD-4BDF-BF92-767BF856361A}.Debug|x64.Build.0 = Debug|x64
+		{3170973C-1EAD-4BDF-BF92-767BF856361A}.Debug|x86.ActiveCfg = Debug|Win32
+		{3170973C-1EAD-4BDF-BF92-767BF856361A}.Debug|x86.Build.0 = Debug|Win32
+		{3170973C-1EAD-4BDF-BF92-767BF856361A}.Release|x64.ActiveCfg = Release|x64
+		{3170973C-1EAD-4BDF-BF92-767BF856361A}.Release|x64.Build.0 = Release|x64
+		{3170973C-1EAD-4BDF-BF92-767BF856361A}.Release|x86.ActiveCfg = Release|Win32
+		{3170973C-1EAD-4BDF-BF92-767BF856361A}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {62D5A7F8-114A-4159-845C-75EFD6935A3F}
+	EndGlobalSection
+EndGlobal
