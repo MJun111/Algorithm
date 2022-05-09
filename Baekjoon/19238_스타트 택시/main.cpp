@@ -38,6 +38,7 @@ void input()
         map[r1][c1] = 2;
         map[r2][c2] = 3;
     }
+
 }
 
 void BFS()
