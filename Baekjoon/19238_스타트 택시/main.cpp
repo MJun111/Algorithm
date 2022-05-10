@@ -23,8 +23,8 @@ struct Taxi
 void input()
 {
 	cin >> n >> m >> fuel;
-	for (int i = 0; i < n; i++)
-		for (int j = 0; j < n; j++)
+	for (int i = 1; i <= n; i++)
+		for (int j = 1; j <= n; j++)
 			cin >> map[i][j];
 
 	cin >> taxi.first >> taxi.second;
@@ -47,6 +47,7 @@ void BFS()
 	pair<int, int> goal = { -1, -1 };
 	queue<Taxi> q;
 
+	visited[taxi.first][taxi.second] = true;
 	q.push({ taxi.first, taxi.second, fuel });
 	while (!q.empty())
 	{
@@ -77,12 +78,13 @@ void BFS()
 			int dr = r + dir[i][0];
 			int dc = c + dir[i][1];
 
-			if (dr < 0 || dr >= n || dc < 0 || dc >= n) continue;
+			if (dr <= 0 || dr > n || dc <= 0 || dc > n) continue;
 			if (map[dr][dc] == 1) continue;
 			if (visited[dr][dc]) continue;
 			visited[dr][dc] = true;
 			q.push({ dr, dc, f - 1 });
 
+			cout << dr << " " << dc << " " << f - 1 << "\n";
 			if (!trigger && map[dr][dc] >= 2)
 			{
 				while (!q.empty())
@@ -97,6 +99,8 @@ void BFS()
 				goal.second = fin[map[dr][dc] - 2].second;
 				q.push({ dr, dc, f - 1 });
 				cout << "intoTrig\n";
+				cout << dr << " " << dc << " " << f - 1 << "\n";
+				cout << goal.first << " " << goal.second << "\n";
 			}
 
 			if (trigger && dr == goal.first && dc == goal.second)
@@ -126,7 +130,7 @@ void solution()
 int main()
 {
 	FAST
-		input();
+	input();
 	solution();
 
 	return 0;
