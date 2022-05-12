@@ -28,7 +28,6 @@ void input()
 			cin >> map[i][j];
 
 	cin >> taxi.first >> taxi.second;
-
 	for (int i = 0; i < m; i++)
 	{
 		int r1, r2, c1, c2;
