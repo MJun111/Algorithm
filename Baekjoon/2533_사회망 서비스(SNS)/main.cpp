@@ -7,7 +7,7 @@ using namespace std;
 int n, u, v;
 vector<int> tree[MAX];
 bool visited[MAX];
-int dp[MAX][2];         // 0 : 얼리어답터, 1 : 일반인
+int dp[MAX][2];                     // 0 : 얼리어답터, 1 : 일반인
 
 void input()
 {
