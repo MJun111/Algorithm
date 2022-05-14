@@ -9,7 +9,7 @@ bool visited[10001];
 
 bool DFS(string st, vector<vector<string>> tickets, int cnt)
 {
-    if (cnt == tickets.size())
+    if (cnt == tickets.size())      // 탐색 완료 시
         return true;
 
     for (int i = 0; i < tickets.size(); i++)
@@ -18,15 +18,15 @@ bool DFS(string st, vector<vector<string>> tickets, int cnt)
         {
             visited[i] = true;
             answer.push_back(tickets[i][1]);
-            bool next = DFS(tickets[i][1], tickets, cnt + 1);
+            bool next = DFS(tickets[i][1], tickets, cnt + 1);       // 다음 행선지
             
-            if (next)
+            if (next)                                               // 올바른 행선지라면 true 리턴
                 return true;
 
-            visited[i] = false;
+            visited[i] = false;                                     // 아닐 시 방문해제 후 반복문 재개
         }
     }
-    answer.pop_back();
+    answer.pop_back();                                              // 올바른 경로를 못 찾을 시 마지막 행선지 삭제
     return false;
 }
 
