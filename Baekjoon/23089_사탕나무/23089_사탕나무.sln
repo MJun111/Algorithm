@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30406.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "23089_사탕나무", "23089_사탕나무.vcxproj", "{EDCCB53A-185C-4976-8541-0812C578CC03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDCCB53A-185C-4976-8541-0812C578CC03}.Debug|x64.ActiveCfg = Debug|x64
+		{EDCCB53A-185C-4976-8541-0812C578CC03}.Debug|x64.Build.0 = Debug|x64
+		{EDCCB53A-185C-4976-8541-0812C578CC03}.Debug|x86.ActiveCfg = Debug|Win32
+		{EDCCB53A-185C-4976-8541-0812C578CC03}.Debug|x86.Build.0 = Debug|Win32
+		{EDCCB53A-185C-4976-8541-0812C578CC03}.Release|x64.ActiveCfg = Release|x64
+		{EDCCB53A-185C-4976-8541-0812C578CC03}.Release|x64.Build.0 = Release|x64
+		{EDCCB53A-185C-4976-8541-0812C578CC03}.Release|x86.ActiveCfg = Release|Win32
+		{EDCCB53A-185C-4976-8541-0812C578CC03}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {693414CF-66DB-4A54-8F6B-C7B3217AEA41}
+	EndGlobalSection
+EndGlobal
