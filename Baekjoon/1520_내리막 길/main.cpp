@@ -28,8 +28,9 @@ int DFS(int r, int c)
         int nr = r + dir[i][0];
         int nc = c + dir[i][1];
         if (nr < 1 || nc < 1 || nr > m || nc > n) continue;
-        if (map[nr][nc] < map[r][c])
-            dp[r][c] += DFS(nr, nc);
+        if (map[nr][nc] >= map[r][c]) continue;
+
+        dp[r][c] += DFS(nr, nc);
     }
     return dp[r][c];
 }
