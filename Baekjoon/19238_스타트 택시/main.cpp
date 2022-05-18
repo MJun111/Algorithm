@@ -4,21 +4,14 @@
 #include <cstring>
 using namespace std;
 #define FAST cin.tie(NULL); cout.tie(NULL); ios::sync_with_stdio(false);
-#define MAX 20 + 1
+#define MAX 21
 
 int n, m, fuel;
 int map[MAX][MAX];
 pair<int, int> taxi;
 vector<pair<int, int>> st, fin;
-int dir[4][2] = { {1, 0}, {0, 1}, {-1, 0}, {0, -1} };
+int dir[4][2] = { {-1, 0}, {0, -1}, {1, 0}, {0, 1} };
 bool visited[MAX][MAX];
-
-struct Taxi
-{
-	int r;
-	int c;
-	int f;
-};
 
 void input()
 {
@@ -26,104 +19,132 @@ void input()
 	for (int i = 1; i <= n; i++)
 		for (int j = 1; j <= n; j++)
 			cin >> map[i][j];
-
 	cin >> taxi.first >> taxi.second;
-	for (int i = 0; i < m; i++)
+	st.push_back({ -1, -1 });			// 0¹øÂ° Ã¤¿ì±â ¿ë ¾²·¹±â °ª
+	fin.push_back({ -1, -1 });			
+	for (int i = 1; i <= m; i++)
 	{
-		int r1, r2, c1, c2;
+		int r1, c1, r2, c2;
 		cin >> r1 >> c1 >> r2 >> c2;
-		st.push_back({ r1, c1 });
-		fin.push_back({ r2, c2 });
-		map[r1][c1] = i + 2;
+		map[r1][c1] = i + 1;			// i¹øÂ° ½Â°´ -> ¸Ê¿¡ i + 1·Î Ç¥½Ã
+		st.push_back({ r1, c1 });		// st[i] : i¹øÂ° ½Â°´ ÁÂÇ¥
+		fin.push_back({ r2, c2 });		// fin[i] : i¹øÂ° µµÂø ÁÂÇ¥
 	}
 
 }
 
-void BFS()
+vector<pair<int, int>> find_Passenger()
 {
-	bool trigger = false;
-	int tmpf = -1;
-	pair<int, int> goal = { -1, -1 };
-	queue<Taxi> q;
-
+	vector<pair<int, int>> p;
+	memset(visited, false, sizeof(visited));
+	priority_queue<pair<int, pair<int, int>>> q;
+	q.push(make_pair(0, make_pair(-taxi.first, -taxi.second)));
 	visited[taxi.first][taxi.second] = true;
-	q.push({ taxi.first, taxi.second, fuel });
+
 	while (!q.empty())
 	{
-		int r = q.front().r;
-		int c = q.front().c;
-		int f = q.front().f;
+		int r = -q.top().second.first;
+		int c = -q.top().second.second;
+		int dist = -q.top().first;
 		q.pop();
 
-		if (m <= 0)
+		if (map[r][c] > 1)
 		{
-			cout << f << "\n";
-			exit(0);
-		}
-
-		if (f == 0 && r != goal.first && c != goal.second)
-		{
-			cout << "-1\n";
-			exit(0);
-		}
-		else if (f < 0)
-		{
-			cout << "-1\n";
-			exit(0);
+			p.push_back(make_pair(map[r][c] - 1, dist));
+			map[r][c] = 0;
+			break;
 		}
 
 		for (int i = 0; i < 4; i++)
 		{
-			int dr = r + dir[i][0];
-			int dc = c + dir[i][1];
+			int nr = r + dir[i][0];
+			int nc = c + dir[i][1];
 
-			if (dr <= 0 || dr > n || dc <= 0 || dc > n) continue;
-			if (map[dr][dc] == 1) continue;
-			if (visited[dr][dc]) continue;
-			visited[dr][dc] = true;
-			q.push({ dr, dc, f - 1 });
+			if (nr < 1 || nc < 1 || nr > n || nc > n) continue;
+			if (visited[nr][nc]) continue;
+			if (map[nr][nc] == 1) continue;
 
-			cout << dr << " " << dc << " " << f - 1 << "\n";
-			if (!trigger && map[dr][dc] >= 2)
-			{
-				while (!q.empty())
-					q.pop();
-
-				memset(visited, false, sizeof(visited));
-				visited[dr][dc] = true;
-				trigger = true;
-				tmpf = f;
-
-				goal.first = fin[map[dr][dc] - 2].first;
-				goal.second = fin[map[dr][dc] - 2].second;
-				q.push({ dr, dc, f - 1 });
-				cout << "intoTrig\n";
-				cout << dr << " " << dc << " " << f - 1 << "\n";
-				cout << goal.first << " " << goal.second << "\n";
-			}
-
-			if (trigger && dr == goal.first && dc == goal.second)
-			{
-				while (!q.empty())
-					q.pop();
-
-				memset(visited, false, sizeof(visited));
-				visited[dr][dc] = true;
-				trigger = false;
-				m--;
-
-				q.push({ dr, dc, 2 * (tmpf - f) - 1 });
-				goal.first = -1;
-				goal.second = -1;
-				cout << "outTrig\n";
-			}
+			visited[nr][nc] = true;
+			q.push(make_pair(-(dist + 1), make_pair(-nr, -nc)));
 		}
 	}
+	return p;
+}
+
+int arrive(int num)
+{
+	int p = -1;
+	memset(visited, false, sizeof(visited));
+	queue<pair<pair<int, int>, int>> q;
+	q.push(make_pair(make_pair(st[num].first, st[num].second), 0));
+	visited[st[num].first][st[num].second] = true;
+
+	while (!q.empty())
+	{
+		int r = q.front().first.first;
+		int c = q.front().first.second;
+		int dist = q.front().second;
+		q.pop();
+
+		if (r == fin[num].first && c == fin[num].second)
+		{
+			p = dist;
+			break;
+		}
+
+		for (int i = 0; i < 4; i++)
+		{
+			int nr = r + dir[i][0];
+			int nc = c + dir[i][1];
+
+			if (nr < 1 || nc < 1 || nr > n || nc > n) continue;
+			if (visited[nr][nc]) continue;
+			if (map[nr][nc] == 1) continue;
+
+			visited[nr][nc] = true;
+			q.push(make_pair(make_pair(nr, nc), dist + 1));
+		}
+	}
+	return p;
+}
+
+void fail()
+{
+	cout << "-1\n";
+	exit(0);
 }
 
 void solution()
 {
-	BFS();
+	while (m-- > 0)
+	{
+		vector<pair<int, int>> passenger = find_Passenger();		// ½Â°´ ¹øÈ£, ÀÌµ¿ÇÑ °Å¸®
+		
+		if (passenger.empty())
+			fail();
+
+		int p_num = passenger.front().first;
+		int dist = passenger.front().second;
+		fuel -= dist;
+
+		if (fuel <= 0)
+			fail();
+
+		int p_dist = arrive(p_num);
+		if (p_dist == -1)
+			fail();
+
+		fuel -= p_dist;
+
+		if (fuel < 0)
+			fail();
+
+		fuel += 2 * p_dist;
+
+		taxi.first = fin[p_num].first;
+		taxi.second = fin[p_num].second;
+	}
+	cout << fuel << "\n";
 }
 
 int main()
