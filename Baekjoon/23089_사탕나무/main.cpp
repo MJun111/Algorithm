@@ -11,6 +11,8 @@ int n, k;
 vector<int> edge[MAX];
 bool visited[MAX];
 int dp[MAX][21];
+int parent[MAX], tmp[MAX];
+queue<int> order;
 
 void input()
 {
@@ -21,49 +23,55 @@ void input()
         cin >> u >> v;
         edge[u].push_back(v);
         edge[v].push_back(u);
-        dp[u][1]++;
-        dp[v][1]++;
-        dp[i][1]++;
     }
 }
 
-int BFS(int num)
+void child_candy(int num)
 {
-    queue<pair<int, int>> q;
-    q.push({ num, 1 });
-    memset(visited, false, n + 1);
+    visited[num] = true;
+    order.push(num);
 
-    while (!q.empty())
+    for (int i = 0; i <= k; i++)
+        dp[num][i] = 1;
+
+    for (int i = 0; i < edge[num].size(); i++)
     {
-        int node = q.front().first;
-        int dis = q.front().second;
-        q.pop();
+        int next = edge[num][i];
+        if (visited[next]) continue;
+        parent[next] = num;
+        child_candy(next);
+        for (int j = 1; j <= k; j++)
+            dp[num][j] += dp[next][j - 1];
+    }
+}
 
-        if (dis > k)
-            break;
+void parent_candy()
+{
+    order.pop();
+    while (!order.empty())
+    {
+        int num = order.front();
+        order.pop();
 
-        for (int i = 0; i < edge[node].size(); i++)
+        for (int i = 0; i <= k; i++) tmp[i] = dp[num][i];
+        for (int i = 1; i <= k; i++)
         {
-            int next = edge[node][i];
-            if (!visited[next])
-            {
-                dp[num][dis + 1] += dp[next][1] - 2;
-                visited[next] = true;
-                q.push({ next, dis + 1 });
-            }
+            if (i == 1) dp[num][i] += 1;
+            else dp[num][i] += dp[parent[num]][i - 1] - tmp[i - 2];
         }
     }
-
-    return dp[num][k];
 }
 
 void solution()
 {
-    int candy = 0;
-    for (int i = 1; i <= n; i++)
-        candy = max(BFS(i), candy);
-    
-    cout << candy << "\n";
+    child_candy(1);
+    parent_candy();
+
+    int ans = dp[1][k];
+    for (int i = 2; i <= n; i++)
+        ans = max(ans, dp[i][k]);
+
+    cout << ans << "\n";
 }
 
 int main()
