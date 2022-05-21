@@ -26,46 +26,26 @@ void input()
     }
 }
 
-void child_candy(int num)
+void solve()
 {
-    visited[num] = true;
-    order.push(num);
-
-    for (int i = 0; i <= k; i++)
-        dp[num][i] = 1;
-
-    for (int i = 0; i < edge[num].size(); i++)
-    {
-        int next = edge[num][i];
-        if (visited[next]) continue;
-        parent[next] = num;
-        child_candy(next);
-        for (int j = 1; j <= k; j++)
-            dp[num][j] += dp[next][j - 1];
-    }
-}
-
-void parent_candy()
-{
-    order.pop();
-    while (!order.empty())
-    {
-        int num = order.front();
-        order.pop();
-
-        for (int i = 0; i <= k; i++) tmp[i] = dp[num][i];
-        for (int i = 1; i <= k; i++)
-        {
-            if (i == 1) dp[num][i] += 1;
-            else dp[num][i] += dp[parent[num]][i - 1] - tmp[i - 2];
-        }
-    }
+    for (int i = 1; i <= n; i++)
+        for (int j = 2; j <= k; j++)
+            for (int x = 0; x < edge[i].size(); x++)
+            {
+                int next = edge[i][x];
+                dp[i][j] += (dp[next][j - 1] - dp[i][j - 2]);
+            }
 }
 
 void solution()
 {
-    child_candy(1);
-    parent_candy();
+    for (int i = 1; i <= n; i++)
+    {
+        dp[i][0] = 1;
+        dp[i][1] = edge[i].size() + 1;
+    }
+
+    solve();
 
     int ans = dp[1][k];
     for (int i = 2; i <= n; i++)
