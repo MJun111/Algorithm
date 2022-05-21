@@ -8,8 +8,7 @@ using namespace std;
 
 int n, k;
 vector<int> edge[MAX];
-bool visited[MAX];
-int dp[MAX][21];
+int dp[21][MAX];
 
 void input()
 {
@@ -27,8 +26,8 @@ void solution()
 {
     for (int i = 1; i <= n; i++)
     {
-        dp[i][0] = 1;
-        dp[i][1] = edge[i].size() + 1;
+        dp[0][i] = 1;
+        dp[1][i] = edge[i].size() + 1;
     }
 
     for (int i = 2; i <= k; i++)
@@ -38,15 +37,15 @@ void solution()
             for (int x = 0; x < edge[j].size(); x++)
             {
                 int next = edge[j][x];
-                dp[j][i] += dp[next][i - 1];
+                dp[i][j] += dp[i-1][next];
             }
-            dp[j][i] -= (dp[j][i - 2] * (edge[j].size() - 1));
+            dp[i][j] -= (dp[i-2][j] * (edge[j].size() - 1));
         }
     }
 
     int ans = 0;
     for (int i = 1; i <= n; i++)
-        ans = max(ans, dp[i][k]);
+        ans = max(ans, dp[k][i]);
 
     cout << ans << "\n";
 }
