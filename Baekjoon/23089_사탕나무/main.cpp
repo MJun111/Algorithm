@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <queue>
 #include <cstring>
 #include <algorithm>
 using namespace std;
@@ -11,8 +10,6 @@ int n, k;
 vector<int> edge[MAX];
 bool visited[MAX];
 int dp[MAX][21];
-int parent[MAX], tmp[MAX];
-queue<int> order;
 
 void input()
 {
@@ -26,17 +23,6 @@ void input()
     }
 }
 
-void solve()
-{
-    for (int i = 1; i <= n; i++)
-        for (int j = 2; j <= k; j++)
-            for (int x = 0; x < edge[i].size(); x++)
-            {
-                int next = edge[i][x];
-                dp[i][j] += (dp[next][j - 1] - dp[i][j - 2]);
-            }
-}
-
 void solution()
 {
     for (int i = 1; i <= n; i++)
@@ -45,10 +31,21 @@ void solution()
         dp[i][1] = edge[i].size() + 1;
     }
 
-    solve();
+    for (int i = 2; i <= k; i++)
+    {
+        for (int j = 1; j <= n; j++)
+        {
+            for (int x = 0; x < edge[j].size(); x++)
+            {
+                int next = edge[j][x];
+                dp[j][i] += dp[next][i - 1];
+            }
+            dp[j][i] -= (dp[j][i - 2] * (edge[j].size() - 1));
+        }
+    }
 
-    int ans = dp[1][k];
-    for (int i = 2; i <= n; i++)
+    int ans = 0;
+    for (int i = 1; i <= n; i++)
         ans = max(ans, dp[i][k]);
 
     cout << ans << "\n";
