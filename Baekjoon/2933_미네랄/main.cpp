@@ -43,7 +43,7 @@ void DFS(int r, int c)
     }
 }
 
-void checkBottom(int r, int c)
+void fallCluster(int r, int c)
 {
     for (int j = 0; j < 4; j++)
     {
@@ -64,10 +64,9 @@ void checkBottom(int r, int c)
         if (flag)
             continue;
 
-        while (1)
+        bool fall = true;
+        while (fall)
         {
-            bool fall = true;
-
             for (int k = 0; k < cluster.size(); k++)
                 map[cluster[k].first][cluster[k].second] = '.';
 
@@ -76,7 +75,7 @@ void checkBottom(int r, int c)
                 int dr = cluster[k].first - 1;
                 int dc = cluster[k].second;
 
-                if (dr == -1 || map[dr][dc] == 'x')
+                if (dr < 0 || map[dr][dc] == 'x')
                 {
                     fall = false;
                     break;
@@ -90,9 +89,6 @@ void checkBottom(int r, int c)
 
                 map[cluster[k].first][cluster[k].second] = 'x';
             }
-
-            if (!fall)
-                break;
         }
     }
 }
@@ -134,7 +130,7 @@ void solution()
 
         map[r][c] = '.';
 
-        checkBottom(r, c);
+        fallCluster(r, c);
     }
 
     for (int i = R - 1; i >= 0; i--)
