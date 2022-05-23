@@ -16,13 +16,13 @@ int dir[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
 void input()
 {
     cin >> R >> C;
-    for (int i = 0; i < R; i++)
+    for (int i = R - 1; i >= 0; i--)
         cin >> map[i];
 }
 
 void DFS(int r, int c)
 {
-    if (r == R - 1)
+    if (r == 0)
     {
         flag = true;
         return;
@@ -73,10 +73,10 @@ void checkBottom(int r, int c)
 
             for (int k = 0; k < cluster.size(); k++)
             {
-                int dr = cluster[k].first + 1;
+                int dr = cluster[k].first - 1;
                 int dc = cluster[k].second;
 
-                if (dr == R || map[dr][dc] == 'x')
+                if (dr == -1 || map[dr][dc] == 'x')
                 {
                     fall = false;
                     break;
@@ -86,7 +86,7 @@ void checkBottom(int r, int c)
             for (int k = 0; k < cluster.size(); k++)
             {
                 if (fall)
-                    cluster[k].first++;
+                    cluster[k].first--;
 
                 map[cluster[k].first][cluster[k].second] = 'x';
             }
@@ -105,8 +105,8 @@ void solution()
     while (n-- > 0)
     {
         cin >> h;
-        
-        int r = R - h;
+
+        int r = h - 1;
         int c = -1;
 
         dir = !dir;
@@ -138,7 +138,7 @@ void solution()
 
     }
 
-    for (int i = 0; i < R; i++)
+    for (int i = R - 1; i >= 0; i--)
         cout << map[i] << "\n";
 }
 
