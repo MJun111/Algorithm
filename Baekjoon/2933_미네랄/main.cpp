@@ -135,7 +135,6 @@ void solution()
         map[r][c] = '.';
 
         checkBottom(r, c);
-
     }
 
     for (int i = R - 1; i >= 0; i--)
@@ -145,7 +144,7 @@ void solution()
 int main()
 {
     FAST
-        input();
+    input();
     solution();
 
     return 0;
