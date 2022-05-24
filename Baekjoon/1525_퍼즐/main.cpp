@@ -8,6 +8,12 @@ int map[3][3];
 pair<int, int> st;
 int dir[4][2] = { {1, 0}, {-1, 0}, {0, 1}, {0, -1} };
 
+struct _move {
+    int r;
+    int c;
+    int cnt;
+};
+
 void input()
 {
     for (int i = 0; i < 3; i++)
@@ -21,13 +27,25 @@ void input()
 
 void BFS()
 {
-    queue<pair<int, int>> q;
-
-    q.push({ st.first, st.second });
+    queue<_move> q;
+    q.push({ st.first, st.second, 0 });
 
     while (!q.empty())
     {
+        int r = q.front().r;
+        int c = q.front().c;
+        int moveCnt = q.front().cnt;
+        q.pop();
 
+        for (int i = 0; i < 4; i++)
+        {
+            int nr = r + dir[i][0];
+            int nc = c + dir[i][1];
+
+            if (nr < 0 || nc < 0 || nr >= 3 || nc >= 3) continue;
+
+
+        }
 
     }
 }
