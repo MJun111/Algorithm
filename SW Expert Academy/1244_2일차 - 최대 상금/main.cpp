@@ -1,29 +1,48 @@
 #include <iostream>
 #include <string>
-#include <queue>
+#include <algorithm>
 using namespace std;
 #define FAST cin.tie(NULL); cout.tie(NULL); ios::sync_with_stdio(false);
 
-int t;
+int t, n, ans;
+string str;
 
-void print(int tc, string ans)
+void DFS(int idx, int cnt)
 {
-    cout << "#" << tc << " " << ans << "\n";
+	if (cnt == n)
+	{
+		ans = max(ans, stoi(str));
+		return;
+	}
+
+	for (int i = idx; i < str.size() - 1; i++)
+		for (int j = i + 1; j < str.size(); j++)
+		{
+			swap(str[i], str[j]);
+			DFS(i, cnt + 1);
+			swap(str[i], str[j]);
+		}
 }
 
 void solution()
 {
-    cin >> t;
-    for (int tc = 1; tc <= t; tc++)
-    {
+	cin >> t;
+	for (int tc = 1; tc <= t; tc++)
+	{
+		cin >> str >> n;
+		ans = 0;
+		if (n > str.size())
+			n = str.size() - 1;
+		DFS(0, 0);
 
-    }
+		cout << "#" << tc << " " << ans << "\n";
+	}
 }
 
 int main()
 {
-    FAST
-    solution();
+	FAST
+		solution();
 
-    return 0;
+	return 0;
 }
