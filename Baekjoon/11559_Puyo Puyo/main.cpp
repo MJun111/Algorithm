@@ -80,8 +80,13 @@ void _search()
                     {
                         int r = puyo[k].first;
                         int c = puyo[k].second;
-                        field[r][c] = 0;
 
+                        while (r < 12)
+                        {
+                            field[r][c] = field[r + 1][c];
+                            r++;
+                        }
+                        field[12][c] = 0;
                     }
                 }
             }
@@ -90,8 +95,6 @@ void _search()
     if (isChain)
     {
         ans++;
-        // fall down
-
         _search();
     }
     else
@@ -101,12 +104,7 @@ void _search()
 void solution()
 {
     _search();
-    for (int i = 12; i > 0; i--)
-    {
-        for (int j = 1; j <= 6; j++)
-            cout << field[i][j] << " ";
-        cout << "\n";
-    }
+    cout << ans << "\n";
 }
 
 int main()
