@@ -1,10 +1,12 @@
 #include <iostream>
 #include <string>
+#include <cmath>
 using namespace std;
 #define FAST cin.tie(NULL); cout.tie(NULL); ios::sync_with_stdio(false);
 
 long long n;
-int k;
+int k, digit;
+int num[16];
 string str;
 
 void input()
@@ -12,61 +14,82 @@ void input()
     cin >> n >> k;
 }
 
+void print()
+{
+    for (int i = digit; i > 0; i--)
+        cout << num[i];
+    
+    cout << "\n";
+}
+
+bool check()
+{
+    int cnt = 0;
+
+    for (int i = 1; i <= digit; i++)
+        if (num[i] == 5)
+            cnt++;
+
+    if (cnt >= k)
+    {
+        /*
+        long long number = 0;
+        for (int i = 1; i <= digit; i++)
+            number += (long long)pow(10, i - 1) * num[i];
+
+        cout << number << "\n";
+        */
+        return true;
+    }
+
+    return false;
+}
+
 void solution()
 {
-    int origin_k = k;
-    if (k == 15)
-    {
-        cout << "555555555555555\n";
-        exit(0);
-    }
-
+    n += 1;
     str = to_string(n);
-    int size = str.size();
-    int i = size - 1;
-    int point = i - k;
+    digit = str.size();
+    
+    for (int i = digit - 1; i >= 0; i--)
+        num[digit - i] = str[i] - '0';
 
-    if (point >= 1)
-		for (int i = point - 1; i >= 0; i--)
-			if (str[i] == '5')
-				k--;
-
-    point = i - k;
-    int cnt = k;
-    while (1)
+    if (check())
     {
-        if (cnt == 0)
-        {
-            if (n < stoll(str))
-            {
-                cout << str << "\n";
-                break;
-            }
-
-            if (str[point] == '9')
-            {
-				str = "1";
-				for (int x = 0; x < size; x++)
-					str += '0';
-				size++;
-                k = origin_k;
-            }
-            else
-            {
-                int num = str[point] - '0';
-                num++;
-                str[point] = (char)(num + '0');
-            }
-            
-            i = size - 1;
-            point = i - k;
-            cnt = k;
-        }
-
-        str[i] = '5';
-        cnt--;
-        i--;
+        print();
     }
+    else {
+        int size = digit;
+        bool c = false;
+        for (int i = 1; i <= size; i++)
+        {
+            while (num[i] != 5)
+            {
+                num[i]++;
+                int idx = 0;
+
+                while (num[i + idx] == 10)
+                {
+                    if (i + idx == digit && digit == size)
+                        digit++;
+                    num[i + idx + 1]++;
+                    num[i + idx] = 0;
+                    idx++;
+                }
+
+                if (check())
+                {
+                    c = true;
+                    print();
+                    break;
+                }
+            }
+            if (c)
+                break;
+        }
+    }
+    for (int i = 1; i <= k; i++)
+        cout << "5";
 }
 
 int main()
