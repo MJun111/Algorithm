@@ -32,13 +32,6 @@ bool check()
 
     if (cnt >= k)
     {
-        /*
-        long long number = 0;
-        for (int i = 1; i <= digit; i++)
-            number += (long long)pow(10, i - 1) * num[i];
-
-        cout << number << "\n";
-        */
         return true;
     }
 
@@ -56,7 +49,11 @@ void solution()
 
     if (check())
     {
-        print();
+        long long number = 0;
+        for (int i = 1; i <= digit; i++)
+            number += (long long)pow(10, i - 1) * num[i];
+
+        cout << number << "\n";
     }
     else {
         int size = digit;
@@ -70,8 +67,6 @@ void solution()
 
                 while (num[i + idx] == 10)
                 {
-                    if (i + idx == digit && digit == size)
-                        digit++;
                     num[i + idx + 1]++;
                     num[i + idx] = 0;
                     idx++;
@@ -80,8 +75,12 @@ void solution()
                 if (check())
                 {
                     c = true;
-                    print();
-                    break;
+                    long long number = 0;
+                    for (int i = 1; i <= digit; i++)
+                        number += (long long)pow(10, i - 1) * num[i];
+
+                    cout << number << "\n";
+                    exit(0);
                 }
             }
             if (c)
