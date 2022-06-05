@@ -14,17 +14,17 @@ bool Search(int a, int b, vector<int> g, vector<int> s, vector<int> w, vector<in
     {
         long long Time = t[i];
 
-        long long Round_Time = Time * 2;
-        long long Move_Cnt = Mid / Round_Time;
-        if (Mid % Round_Time >= Time) Move_Cnt++;
-        long long Max_Take = w[i] * Move_Cnt;
+        long long Round_Time = Time * 2;            // 왕복 시간
+        long long Move_Cnt = Mid / Round_Time;      // 이동 횟수
+        if (Mid % Round_Time >= Time) Move_Cnt++;   // 편도 1회 가능 여부
+        long long Max_Take = w[i] * Move_Cnt;       // 시간 내에 옮길 수 있는 최대 양
 
-        Total_Gold += min((long long)g[i], Max_Take);
+        Total_Gold += min((long long)g[i], Max_Take);   
         Total_Silver += min((long long)s[i], Max_Take);
-        Total_Mineral += min((long long)g[i] + s[i], Max_Take);
+        Total_Mineral += min((long long)g[i] + s[i], Max_Take); 
     }
 
-    if (Total_Gold >= a && Total_Silver >= b && Total_Mineral >= a + b) return true;
+    if (Total_Gold >= a && Total_Silver >= b && Total_Mineral >= (long long)a + b) return true;
     return false;
 }
 
