@@ -13,8 +13,6 @@ long long solution(int n, vector<int> times) {
         for (auto t : times)
             cnt += mid / t;
 
-        cout << mid << ", " << cnt << "\n";
-
         if (cnt >= n)
             right = mid;
         else
