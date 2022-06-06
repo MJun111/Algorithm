@@ -49,16 +49,17 @@ void solution()
 
     if (check())
     {
+        /*
         long long number = 0;
         for (int i = 1; i <= digit; i++)
             number += (long long)pow(10, i - 1) * num[i];
 
         cout << number << "\n";
+        */
+        print();
     }
     else {
-        int size = digit;
-        bool c = false;
-        for (int i = 1; i <= size; i++)
+        for (int i = 1; i <= digit; i++)
         {
             while (num[i] != 5)
             {
@@ -74,7 +75,7 @@ void solution()
 
                 if (check())
                 {
-                    c = true;
+                    // print(); // -> ?
                     long long number = 0;
                     for (int i = 1; i <= digit; i++)
                         number += (long long)pow(10, i - 1) * num[i];
@@ -83,8 +84,6 @@ void solution()
                     exit(0);
                 }
             }
-            if (c)
-                break;
         }
     }
     for (int i = 1; i <= k; i++)
