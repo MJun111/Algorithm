@@ -10,17 +10,6 @@ int tmp[301][301];
 int dir[4][2] = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
 bool visited[301][301];
 
-void test_print()
-{
-    cout << "\n";
-    for (int i = 1; i <= n; i++)
-    {
-        for (int j = 1; j <= m; j++)
-            cout << map[i][j] << " ";
-        cout << "\n";
-    }
-}
-
 void input()
 {
     cin >> n >> m;
