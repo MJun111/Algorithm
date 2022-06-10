@@ -75,7 +75,8 @@ void solution()
 
                 if (check())
                 {
-                    // print(); // -> ?
+                    //print(); // -> ?
+                    
                     long long number = 0;
                     for (int i = 1; i <= digit; i++)
                         number += (long long)pow(10, i - 1) * num[i];
