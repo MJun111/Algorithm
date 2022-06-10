@@ -22,6 +22,7 @@ int solution(int distance, vector<int> rocks, int n) {
             else
                 prev = r;           // 이전 바위 위치 갱신
         }
+
         if (distance - prev < mid)  // 마지막 부분 탐색
             cnt++;
 
