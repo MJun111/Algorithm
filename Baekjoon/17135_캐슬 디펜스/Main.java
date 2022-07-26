@@ -1,3 +1,5 @@
+package algorithm;
+
 import java.util.*;
 import java.io.*;
 
@@ -12,15 +14,22 @@ class tri {
 }
 
 public class Main {
-    static int n, m, d, enemies;
+    static int n, m, d;
     static int[][] map;
     static ArrayList<tri> arr;
     static int[] dc = {-1, 0, 1};       // 왼 -> 위 -> 오
     static int[] dr = {0, -1, 0};
+    
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        input();
+    	setArcher();
+        goGame();
+    }
+    
+    static void input() throws IOException {
+    	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
-
+        
         st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
         m = Integer.parseInt(st.nextToken());
@@ -32,15 +41,18 @@ public class Main {
             st = new StringTokenizer(br.readLine());
             for (int j = 0; j < m; j++) {
                 map[i][j] = Integer.parseInt(st.nextToken());
-                if (map[i][j] == 1) enemies++;
             }
         }
-
-        // input archer combination
+    }
+    
+    static void setArcher() {
         arr = new ArrayList<>();
         boolean[] visited = new boolean[m];
         combination(visited, 0, 3);
-
+        
+    }
+    
+    static void goGame() {
         int ans = 0;
         int testCase = 0;
         while (testCase < arr.size()) {
@@ -83,9 +95,10 @@ public class Main {
             ans = Math.max(ans, killSoldier);
             testCase++;
         }
+
         System.out.println(ans);
     }
-
+    
     static void combination(boolean[] visited, int start, int r) {
         if (r == 0) {
             int size = 0;
@@ -140,6 +153,7 @@ public class Main {
             }
         }
     }
+    
     static int kill (boolean[][] isDead, int[][] copyMap) {
         int cnt = 0;
         for (int i = 0; i < n; i++) {
