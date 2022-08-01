@@ -73,7 +73,6 @@ public class Main {
                 }
             }
         }
-
         System.out.println(dp[r - 1][c - 1]);
     }
 }
