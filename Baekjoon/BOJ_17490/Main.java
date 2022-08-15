@@ -9,7 +9,7 @@ public class Main {
     static int n, m;
     static long k;
     static boolean[] cons;
-    static int[] s;
+    static long[] s;
     static StringBuilder sb = new StringBuilder();
     public static void main(String[] args) throws IOException {
         input();
@@ -32,11 +32,11 @@ public class Main {
         }
 
         cons = new boolean[n + 1];
-        s = new int[n + 1];
+        s = new long[n + 1];
 
         st = new StringTokenizer(br.readLine());
         for (int i = 1; i <= n; i++)
-            s[i] = Integer.parseInt(st.nextToken());
+            s[i] = Long.parseLong(st.nextToken());
 
         // 공사 구간인 부분 중 작은 부분을 cons배열에서 true로 체크
         for (int i = 0; i < m; i++) {
@@ -58,7 +58,7 @@ public class Main {
     }
 
     static void solution() {
-        ArrayList<PriorityQueue<Integer>> section = new ArrayList<>();
+        ArrayList<PriorityQueue<Long>> section = new ArrayList<>();
         section.add(new PriorityQueue<>());
 
         // 구간 별 돌 갯수를 pq에 추가
@@ -80,8 +80,8 @@ public class Main {
         }
 
         // 각 구역 별 다리를 놓는 데 필요한 최소 돌 갯수만큼을 가져와 더한 후 k와 비교
-        int sum = 0;
-        for (int i = 0; i < section.size(); i++)
+        long sum = 0;
+        for (int i = 0; i <= idx; i++)
             sum += section.get(i).poll();
 
         if (sum <= k)
