@@ -17,39 +17,30 @@ public class BOJ_1074 {
 		separate(0, 0, N);	
 	}
 	
-	static void separate(long y, long x, long n) {
-		if (n == 1) {
-			for (long i = y; i <= y + 1; i++) {
-				for (long j = x; j <= x + 1; j++) {
-					if (i == r && j == c) {
-						System.out.println(totalCnt);
-					}
-					else
-						totalCnt++;
-				}
-			}
+	static void separate(int y, int x, int n) {
+		if (n == 0) {
+			System.out.println(totalCnt);
 			return;
 		}
 		
 		n--;
-		long size = (long) Math.pow(2, n);
-		long originSize = (long) Math.pow(2, n + 1);
+		int size = (int) Math.pow(2, n);
 		if (r >= y && r < y + size) {
 			if (c >= x && c < x + size) {
 				separate(y, x, n);
 			}
 			else {
-				totalCnt += originSize * originSize / 4;
+				totalCnt += size * size;
 				separate(y, x + size, n);
 			}
 		}
 		else {
 			if (c >= x && c < x + size) {
-				totalCnt += originSize * originSize * 2 / 4;
+				totalCnt +=	size * size * 2;
 				separate(y + size, x, n);
 			}
 			else {
-				totalCnt += originSize * originSize * 3 / 4;
+				totalCnt += size * size * 3;
 				separate(y + size, x + size, n);
 			}
 		}
