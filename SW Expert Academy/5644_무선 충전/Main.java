@@ -101,8 +101,11 @@ public class SWEA_5644 {
 					tmpSum = Math.max(tmpSum, tmpB + map[overlap.get(j)][ay][ax]);
 					tmpSum = Math.max(tmpSum, map[overlap.get(j)][ay][ax]); 
 					
-					tmpA = Math.max(tmpA, map[overlap.get(j)][ay][ax]);
-					tmpB = Math.max(tmpB, map[overlap.get(j)][by][bx]);
+					// 다음 겹치는 부분이 있을 경우를 대비하여 작은 값 갱신
+					if (tmpA < tmpB)
+						tmpA = Math.max(tmpA, map[overlap.get(j)][ay][ax]);
+					else
+						tmpB = Math.max(tmpB, map[overlap.get(j)][by][bx]);
 				}
 				sum += tmpSum;
 				
