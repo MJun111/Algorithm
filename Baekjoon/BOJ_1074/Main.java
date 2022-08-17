@@ -25,25 +25,11 @@ public class BOJ_1074 {
 		
 		n--;
 		int size = (int) Math.pow(2, n);
-		if (r >= y && r < y + size) {
-			if (c >= x && c < x + size) {
-				separate(y, x, n);
-			}
-			else {
-				totalCnt += size * size;
-				separate(y, x + size, n);
-			}
-		}
-		else {
-			if (c >= x && c < x + size) {
-				totalCnt +=	size * size * 2;
-				separate(y + size, x, n);
-			}
-			else {
-				totalCnt += size * size * 3;
-				separate(y + size, x + size, n);
-			}
-		}
+		
+		if (r < y + size && c < x + size) separate(y, x, n);
+		else if (r < y + size && c >= x + size) { totalCnt += size * size; separate(y, x + size, n); }
+		else if (r >= y + size && c < x + size) { totalCnt +=	size * size * 2; separate(y + size, x, n); }
+		else { totalCnt += size * size * 3; separate(y + size, x + size, n); }
 		
 	}
 	
