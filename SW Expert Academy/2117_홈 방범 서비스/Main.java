@@ -2,7 +2,9 @@ import java.io.*;
 import java.util.*;
 
 /*
- * 운영 비용 = k * k + (k-1) * (k-1)
+ * 메모리 : 22,700 kb
+ * 실행 시간 : 203 ms
+ * 코드 길이 : 1,726 B
  */
 
 class Pair {
