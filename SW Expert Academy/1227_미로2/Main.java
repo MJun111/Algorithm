@@ -1,6 +1,12 @@
 import java.io.*;
 import java.util.*;
 
+/*
+* 메모리 : 25,612 kb
+* 실행 시간 : 139 ms
+* 코드 길이 : 1,402
+*/
+
 public class SWEA_1227 {
 	static int stY, stX;
 	static int[][] map;
