@@ -1,8 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-import static java.lang.System.out;
-
 class Pair {
     int y, x;
     Pair(int y, int x) {
