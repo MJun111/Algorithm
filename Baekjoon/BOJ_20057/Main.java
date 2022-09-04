@@ -37,6 +37,7 @@ public class Main {
         while(true) {
             r += dy[dir];
             c += dx[dir];
+            setSand(dir,r, c);
 
             if(--move == 0) {
                 dir = (dir + 1) % 4;
@@ -44,7 +45,6 @@ public class Main {
                     cnt++;
                 move = cnt;
             }
-            setSand(r, c);
 
             if (r == 0 && c == 0) {
                 break;
@@ -54,28 +54,23 @@ public class Main {
         System.out.println(ans);
     }
 
-    static void setSand(int r, int c) {
-        // y, x, % 순서
-        int[][] dir = {
-                {-2, 0, 2}, {-1, -1, 10}, {-1, 0, 7}, {-1, 1, 1},
-                {0, -2, 5}, {1, -1, 10}, {1, 0, 7}, {1, 1, 1}, {2, 0, 2}
+    static void setSand(int d, int r, int c) {
+        // dir, y, x, % 순서
+        int[][][] dir = {
+                {{-2, 0, 2}, {-1, -1, 10}, {-1, 0, 7}, {-1, 1, 1}, {0, -2, 5}, {1, -1, 10}, {1, 0, 7}, {1, 1, 1}, {2, 0, 2}, {0, -1, 0}},
+                {{0, -2, 2}, {1, -1, 10}, {0, -1, 7}, {-1, -1, 1}, {2, 0, 5}, {1, 1, 10}, {0, 1, 7}, {-1, 1, 1}, {0, 2, 2}, {1, 0, 0}},
+                {{-2, 0, 2}, {-1, 1, 10}, {-1, 0, 7}, {-1, -1, 1}, {0, 2, 5}, {1, 1, 10}, {1, 0, 7}, {1, -1, 1}, {2, 0, 2}, {0, 1, 0}},
+                {{0, -2, 2}, {-1, -1, 10}, {0, -1, 7}, {1, -1, 1}, {-2, 0, 5}, {-1, 1, 10}, {0, 1, 7}, {1, 1, 1}, {0, 2, 2}, {-1, 0, 0}}
         };
         int amount = map[r][c];
 
         for (int i = 0; i < 9; i++) {
-            int nr = r + dir[i][0];
-            int nc = c + dir[i][1];
-            int percent = dir[i][2];
-            int sand = (int)Math.floor((double)map[r][c] * percent / 100);
-            if (amount * percent / 100 > (double)sand) {
-                amount -= sand - 1;
-            }
-            else {
-                amount -= sand;
-            }
+            int nr = r + dir[d][i][0];
+            int nc = c + dir[d][i][1];
+            int percent = dir[d][i][2];
 
-//            int sand = map[r][c] * percent / 100;
-//            amount -= sand;
+            int sand = map[r][c] * percent / 100;
+            amount -= sand;
 
             if (nr < 0 || nc < 0 || nr >= n || nc >= n)
                 ans += sand;
@@ -83,25 +78,14 @@ public class Main {
                 map[nr][nc] += sand;
         }
 
-        // 알파 좌표 : r, c - 1
-        if (c - 1 >= 0)
-            map[r][c - 1] += amount;
-        else
+        // 마지막 알파 처리
+        int nr = r + dir[d][9][0];
+        int nc = c + dir[d][9][1];
+        if (nr < 0 || nc < 0 || nr >= n || nc >= n)
             ans += amount;
+        else
+            map[nr][nc] += amount;
 
         map[r][c] = 0;
-
-        System.out.println("===========Test==============");
-        System.out.println(r + ", " + c);
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                System.out.print(map[i][j] + " ");
-            }
-            System.out.println();
-        }
-
-        System.out.println("ans : " + ans);
-
     }
-
 }
