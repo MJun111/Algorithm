@@ -19,13 +19,12 @@ public class Main {
         }
 
         for (int i = 0; i < n; i++) {
-            int tmp = 0;
+            dp[i] = 1;
             for (int j = 0; j < i; j++) {
-                if (A[i] > A[j]) {
-                    tmp = Math.max(tmp, dp[j]);
+                if (A[i] > A[j] && dp[i] < dp[j] + 1) {
+                    dp[i] = dp[j] + 1;
                 }
             }
-            dp[i] = tmp + 1;
             ans = Math.max(ans, dp[i]);
         }
 
