@@ -2,17 +2,15 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static int n, ans;
-    static int[] A;
-    static int[] dp;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
-        n = Integer.parseInt(br.readLine());
-        A = new int[n];
-        dp = new int[n];
-
+        int n = Integer.parseInt(br.readLine());
+        int[] A = new int[n];
+        int[] dp = new int[n];
+        int ans = 0;
+        
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
             A[i] = Integer.parseInt(st.nextToken());
@@ -27,7 +25,6 @@ public class Main {
             }
             ans = Math.max(ans, dp[i]);
         }
-
         System.out.println(ans);
     }
 }
