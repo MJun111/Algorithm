@@ -14,7 +14,7 @@ import java.util.*;
  *    
  *   메모리 : 43,840 kb
  *   실행시간 : 163ms
- *   코드길이 : 2,402
+ *   코드길이 : 3,880
  */
 
 public class SWEA_2477 {
