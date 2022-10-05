@@ -31,7 +31,7 @@ public class Main {
     static ArrayList<Fish>[][] map;
     static ArrayList<Fish> fish;
     static int[][] smell;
-    static int maxCnt = Integer.MIN_VALUE;
+    static int maxCnt;
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
