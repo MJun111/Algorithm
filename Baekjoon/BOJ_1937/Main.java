@@ -1,6 +1,11 @@
 import java.io.*;
 import java.util.*;
 
+/*
+분기가 많아보여 bfs + dp로 접근했지만, 메모리초과
+n이 최대 500이라 bfs 과정에서 메모리가 터질 것 같다는 의견이 있었음
+*/
+
 public class Main {
     static int n, ans;
     static int[][] map;
