@@ -26,6 +26,7 @@ public class Main {
         int t = Integer.parseInt(br.readLine());
 
         while (t-- > 0) {
+            // input
             st = new StringTokenizer(br.readLine());
             n = Integer.parseInt(st.nextToken());
             d = Integer.parseInt(st.nextToken());
@@ -45,10 +46,12 @@ public class Main {
                 int b = Integer.parseInt(st.nextToken());
                 int s = Integer.parseInt(st.nextToken());
 
+                // 왜 안될까요?
 //                if(list[b] == null) list[b] = new ArrayList<>();
                 list[b].add(new Computer(a, s));
             }
 
+            // 다익스트라로 시작점부터 각 컴퓨터까지 감염되는 시간 구하기
             dijkstra();
             int cnt = 0, totalTime = 0;
             for (int i = 1; i <= n; i++) {
@@ -73,11 +76,12 @@ public class Main {
             if (dist[cur.link] < cur.sec) continue;
 
             for (int i = 0; i < list[cur.link].size(); i++) {
-                int time = dist[cur.link] + list[cur.link].get(i).sec;
+                Computer next = list[cur.link].get(i);
+                int time = dist[cur.link] + next.sec;
 
-                if (time < dist[list[cur.link].get(i).link]) {
-                    dist[list[cur.link].get(i).link] = time;
-                    pq.add(new Computer(list[cur.link].get(i).link, time));
+                if (time < dist[next.link]) {
+                    dist[next.link] = time;
+                    pq.add(new Computer(next.link, time));
                 }
             }
         }
