@@ -15,9 +15,11 @@ public class Main {
     }
 
     static int getMax(String substr) {
-        int j = 0, n = substr.length(), max = 0;
+        int n = substr.length();
+        int max = 0;
         int pi[] = new int[n];
-
+        
+        int j = 0;
         for (int i = 1; i < n; i++) {
             while (j > 0 && substr.charAt(i) != substr.charAt(j)) j = pi[j-1];
 
