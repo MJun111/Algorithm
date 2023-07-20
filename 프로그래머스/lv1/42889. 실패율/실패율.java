@@ -19,26 +19,24 @@ class Solution {
     }
     public int[] solution(int N, int[] stages) {
         int[] answer = new int[N];
-        
+        int[] arriveSum = new int[N + 2];
         Map<Integer, Integer> arrive = new HashMap<>();
-        
+            
         for (int st : stages) {
             arrive.merge(st, 1, Integer::sum);
         }
         
+        arriveSum[N + 1] = arrive.getOrDefault(N + 1, 0);
+        for (int i = N; i >= 1; i--) {
+            arriveSum[i] = arriveSum[i + 1] + arrive.getOrDefault(i, 0);
+        }
+        
         PriorityQueue<Stage> pq = new PriorityQueue<>();
         for (int i = 1; i <= N; i++) {
-            int clear = 0;
             float percent = 0;
             
-            for (int j = N + 1; j >= i; j--) {
-                if (arrive.get(j) == null) continue;
-                
-                clear += arrive.get(j);
-            }
-            
-            if (clear != 0) {
-                percent = (float)arrive.getOrDefault(i, 0) / clear;
+            if (arriveSum[i] != 0) {
+                percent = (float)arrive.getOrDefault(i, 0) / arriveSum[i];
             }
             
             pq.add(new Stage(i, percent));
